@@ -21,7 +21,7 @@ def generate_token(request, username, channel):
         Role_Publisher,
         1800,
     )
-    return Response({'token': token}, 200)
+    return Response({'token': token, 'app_id': settings.AGORA_APP_ID}, 200)
 
 
 @api_view(['GET'])
