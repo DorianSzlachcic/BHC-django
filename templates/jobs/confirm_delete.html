@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <div>
+        <h2 class="text-center mb-5">Czy na pewno chcesz usunąć ofertę?</h2>
+        <div class="row d-flex justify-content-center">
+            <div class="col-7">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="row mx-auto">
+                        <div class="col d-grid">
+                            <button class="btn btn-danger btn-lg" type="submit">Tak</button>
+                        </div>
+                        <div class="col d-grid">
+                            <a class="btn btn-secondary btn-lg" href="{% url 'your_offers' %}">Nie</a>
+                        </div>
+                    </div>
+                    
+                </form>
+    
+            </div>
+        </div>
+    </div>
+</body>
