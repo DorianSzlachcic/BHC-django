@@ -4,13 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import JobForm
 from django.core.exceptions import PermissionDenied
 
-# def check_if_employer(user):
-#     if user.groups.filter(name='employer').exists():
-#         return True
-#     else:
-#         raise PermissionDenied
-
-
 def jobOffers(request):
     jobs = Job.objects.all()
     return render(request, "jobs/jobs_list.html", context={'jobs': jobs})
