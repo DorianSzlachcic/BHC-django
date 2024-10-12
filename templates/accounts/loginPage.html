@@ -35,25 +35,25 @@
             }
         </style>
     </head>
+
     <body>
-    
         <h1>Quick Job</h1>
         <p>Zaloguj się</p>
         <div >
             <h2>Logowanie</h2>
-            <div >
+            <div>
             <form method="POST" action="">
                 {% csrf_token %}
                 {{form}}
                 <div>
                     <button type="submit">Zaloguj się</button>
                 </div>
-                
             </form>
+
             {% for msg in messages %}
             {{msg}}
             {% endfor %}
             </div>
-    </div>
+        </div>
     </body>
 </html>
