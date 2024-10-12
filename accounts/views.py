@@ -8,6 +8,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm    
 from .forms import RegisterForm,RegisterCompanyForm
 
+
 def homePage(request):
     return render(request, "home.html")
 
@@ -23,7 +24,7 @@ def loginPage(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
-            return redirect('userPanel')
+            return redirect('home')
         else:
             messages.error(request,"Nie udało się zalogować użytkownika.",extra_tags="danger")
 
@@ -37,6 +38,7 @@ def logoutUser(request):
     messages.success(request,"Wylogowano pomyślnie.",extra_tags="success")
     return redirect('home')
 
+
 @login_required
 def registerCompany(request):
     if not request.user.is_authenticated:
@@ -47,7 +49,8 @@ def registerCompany(request):
     if request.method == 'POST':
         form = RegisterCompanyForm(request.POST)
         if form.is_valid():
-            company = form.save()
+            company = form.save(commit=False)
+            company.ownerID = request.user
             company.save()
             messages.success(request, "firma zarejestrowana", extra_tags="success")
             return redirect('login')
@@ -55,12 +58,14 @@ def registerCompany(request):
     context = {'form': form}
     return render(request, "accounts/registerCompanyPage.html", context)
 
+
 @login_required
 def userPanel(request):
     if not request.user.is_authenticated:
         return redirect('home')
     return render(request, "userPanel/userPanel.html")
-                  
+
+
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')

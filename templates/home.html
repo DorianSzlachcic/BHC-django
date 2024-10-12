@@ -1,15 +1,15 @@
 {% include 'head.html' %}
 {% include 'navbar.html' %}
+{% load static %}
 
-          <main class="container d-flex align-items-center" style="height: 80vh;">
-            <div class="w-50 text-center"> <!-- Dodano padding right -->
-                <h2>Witaj w SnapHire!</h2>
-                <p>Znajdź idealnych kandydatów w kilka chwil!</p>
-            </div>
-            <div class="w-50 text-center">
-                {% load static %}
-                <img src="{% static 'person-in-computer-icon.svg' %}" alt="" width="300" height="300" class="d-inline-block align-text-top">
-            </div>
-        </main>
+  <main class="container d-flex align-items-center" style="height: 80vh;">
+    <div class="w-50 text-center"> <!-- Dodano padding right -->
+        <h2>Witaj w SnapHire!</h2>
+        <p>Znajdź idealną pracę w kilka chwil!</p>
+    </div>
+    <div class="w-50 text-center">
+        <img src="{% static 'person-in-computer-icon.svg' %}" alt="" width="300" height="300" class="d-inline-block align-text-top">
+    </div>
+  </main>
   
 {% include 'footer.html' %}
