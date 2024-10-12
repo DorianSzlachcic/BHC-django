@@ -17,7 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import render
 from django.urls import path
+
 import accounts
+import accounts.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
