@@ -59,13 +59,6 @@ def registerCompany(request):
     return render(request, "accounts/registerCompanyPage.html", context)
 
 
-@login_required
-def userPanel(request):
-    if not request.user.is_authenticated:
-        return redirect('home')
-    return render(request, "userPanel/userPanel.html")
-
-
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
