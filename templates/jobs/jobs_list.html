@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+
+<body>
+    <div>
+        <h2>Job offers</h3>
+        {% for offer in jobs %}
+            <p>------------------------------------------</p>
+            <h3> {{ offer.title }} </h3>
+            <img src="{{offer.employerLogo}}">
+            <b>{{ offer.employer }} </b>
+            <p> salary: {{ offer.salary }} zł/mc</p>
+            <p> open to {{ offer.dateExpired }}</p>
+
+        {% endfor %}
+    </div>
+
+
+</body>
+
+</html>
