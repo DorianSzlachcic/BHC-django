@@ -6,7 +6,8 @@ from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm    
-from .forms import RegisterForm
+from .forms import RegisterForm,RegisterCompanyForm
+
 
 def homePage(request):
     return render(request, "home.html")
@@ -26,6 +27,7 @@ def loginPage(request):
             return redirect('home')
         else:
             messages.error(request,"Nie udało się zalogować użytkownika.",extra_tags="danger")
+
     context = {'form': form}
     return render(request, "accounts/loginPage.html", context)
 
@@ -34,7 +36,27 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     messages.success(request,"Wylogowano pomyślnie.",extra_tags="success")
-    return redirect('login')
+    return redirect('home')
+
+
+@login_required
+def registerCompany(request):
+    if not request.user.is_authenticated:
+        return redirect('home')
+    
+    form = RegisterCompanyForm()
+
+    if request.method == 'POST':
+        form = RegisterCompanyForm(request.POST)
+        if form.is_valid():
+            company = form.save(commit=False)
+            company.ownerID = request.user
+            company.save()
+            messages.success(request, "firma zarejestrowana", extra_tags="success")
+            return redirect('login')
+        
+    context = {'form': form}
+    return render(request, "accounts/registerCompanyPage.html", context)
 
 
 def registerPage(request):
