@@ -8,11 +8,12 @@
         <h2>Job offers</h3>
         {% for offer in jobs %}
             <p>------------------------------------------</p>
-            <h3> {{ offer.title }} </h3>
+            <a href="{% url 'details' offer.id%}">{{ offer.title }}<br></a>
             <img src="{{offer.employerLogo}}">
             <b>{{ offer.employer }} </b>
             <p> salary: {{ offer.salary }} zł/mc</p>
-            <p> open to {{ offer.dateExpired }}</p>
+            {% now "DATE_FORMAT" as current_time %}
+            <p> open for {{ offer.dateExpired }}</p>
 
         {% endfor %}
     </div>
