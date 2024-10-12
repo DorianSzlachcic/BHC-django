@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AGORA_APP_ID = '7100b184dfb14e03beb0f154af4fc804'
+AGORA_APP_CERTIFICATE = '47e5a0312b664d81bb65e8f4caee81ed'
+
 
 # Application definition
 
@@ -39,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'jobs',
+    'api',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -118,6 +123,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # jeśli masz folder statyczny na poziomie projektu
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
