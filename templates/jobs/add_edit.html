@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <div>
+        <h2>{% if edit %}Edytuj ofertę{% else %}Dodaj ofertę{% endif %}</h2>
+        <div class="my-3 mb-4 px-3">
+            <form action="{% if edit %}{% url 'editOffer' id %}{% else %}{% url 'addOffer' %}{% endif %}" id="form" method="post">
+                {% csrf_token %}
+                <button class="btn btn-primary my-3" type="submit">{% if edit %}Edytuj{% else %}Dodaj{% endif %}</button>
+                <a href="{% url 'your_offers' %}" class="btn btn-secondary my-3">Anuluj</a>
+
+                <div class="row">
+                    <div class="col">
+                        <label class="my-2 fw-bold">Title</label>
+                        {{ form.title }}<br>
+                        <label class="my-2 fw-bold">Location</label>
+                        {{ form.location }}<br>
+                        <label class="my-2 fw-bold">Salary</label>
+                        {{ form.salary }}<br>
+                        <label class="my-2 fw-bold">Type of work</label>
+                        {{ form.typeOfWork }}<br>
+                        <label class="my-2 fw-bold">Contract</label>
+                        {{ form.contract }}<br>
+                        <label class="my-2 fw-bold">Operating mode</label>
+                        {{ form.operatingMode }}<br>
+                        <label class="my-2 fw-bold">Date expired</label>
+                        {{ form.dateExpired }}<br>
+                        <label class="my-2 fw-bold">Description</label>
+                        {{ form.jobDescription }}<br>
+                        <label class="my-2 fw-bold">Required skills</label>
+                        {{ form.requiredSkills }}<br>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
