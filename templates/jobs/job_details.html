@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<head>
+{% include 'head.html' %}
+{% include 'navbar.html' %}
+{% load static %}
 
-</head>
-<body>
-    <div>
+    <main class="container d-flex align-items-center" style="height: 80vh;">
         <h2> {{ offer.title }} </h2>
         <img src="{{offer.employerLogo}}">
         <b>Employer: {{ offer.employer }} </b>
@@ -18,9 +17,5 @@
         <h3>Required skills</h3>
         <p> {{ offer.requiredSkills }}</p>
         <button>Apply</button>
-    </div>
-
-
-</body>
-
-</html>
+    </main>
+{% include 'footer.html' %}

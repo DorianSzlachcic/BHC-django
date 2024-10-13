@@ -1,39 +1,24 @@
-<!DOCTYPE html>
-<head>
+{% include 'head.html' %}
+{% include 'navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-</head>
-<body>
-    <div>
-        <h2>{% if edit %}Edytuj ofertę{% else %}Dodaj ofertę{% endif %}</h2>
-        <div class="my-3 mb-4 px-3">
-            <form action="{% if edit %}{% url 'editOffer' id %}{% else %}{% url 'addOffer' %}{% endif %}" id="form" method="post">
-                {% csrf_token %}
-                <button class="btn btn-primary my-3" type="submit">{% if edit %}Edytuj{% else %}Dodaj{% endif %}</button>
-                <a href="{% url 'your_offers' %}" class="btn btn-secondary my-3">Anuluj</a>
-
-                <div class="row">
-                    <div class="col">
-                        <label class="my-2 fw-bold">Title</label>
-                        {{ form.title }}<br>
-                        <label class="my-2 fw-bold">Location</label>
-                        {{ form.location }}<br>
-                        <label class="my-2 fw-bold">Salary</label>
-                        {{ form.salary }}<br>
-                        <label class="my-2 fw-bold">Type of work</label>
-                        {{ form.typeOfWork }}<br>
-                        <label class="my-2 fw-bold">Contract</label>
-                        {{ form.contract }}<br>
-                        <label class="my-2 fw-bold">Operating mode</label>
-                        {{ form.operatingMode }}<br>
-                        <label class="my-2 fw-bold">Date expired</label>
-                        {{ form.dateExpired }}<br>
-                        <label class="my-2 fw-bold">Description</label>
-                        {{ form.jobDescription }}<br>
-                        <label class="my-2 fw-bold">Required skills</label>
-                        {{ form.requiredSkills }}<br>
-                    </div>
-                </div>
-            </form>
-        </div>
+<main class="container d-flex flex-column align-items-center justify-content-center text-center" style="min-height: 80vh;">
+    <h2 class="mb-5">{% if edit %}Edytuj ofertę{% else %}Dodaj ofertę{% endif %}</h2>
+    
+    <div class="col-md-8">
+        <form action="{% if edit %}{% url 'editOffer' id %}{% else %}{% url 'addOffer' %}{% endif %}" id="form" method="post">
+            {% csrf_token %}
+            
+            <!-- Automatyczne renderowanie formularza za pomocą Crispy Forms -->
+            {{ form|crispy }}
+            
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-primary me-3" type="submit">{% if edit %}Edytuj{% else %}Dodaj{% endif %}</button>
+                <a href="{% url 'your_offers' %}" class="btn btn-secondary">Anuluj</a>
+            </div>
+        </form>
     </div>
-</body>
+</main>
+
+{% include 'footer.html' %}
