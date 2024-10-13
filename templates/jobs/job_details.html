@@ -17,7 +17,11 @@
         <p> {{ offer.jobDescription }} </p>
         <h3>Required skills</h3>
         <p> {{ offer.requiredSkills }}</p>
-        <button>Apply</button>
+        {% if applied %}
+            <span>Applied</span>
+        {% else %}
+            <a href="{% url 'apply' offer.pk %}">Apply</a>
+        {% endif %}
     </div>
 
 
