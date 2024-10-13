@@ -10,18 +10,18 @@ from django.conf import settings
 @api_view(['GET'])
 def generate_token(request, username, channel):
     try:
-        User.objects.get(username=username)
+        user = User.objects.get(username=username)
     except ObjectDoesNotExist:
         return Response(status=403)
-    token = RtcTokenBuilder().build_token_with_user_account(
+    token = RtcTokenBuilder().build_token_with_uid(
         settings.AGORA_APP_ID,
         settings.AGORA_APP_CERTIFICATE,
         channel,
-        username,
+        user.pk,
         Role_Publisher,
         1800,
     )
-    return Response({'token': token, 'app_id': settings.AGORA_APP_ID}, 200)
+    return Response({'token': token, 'app_id': settings.AGORA_APP_ID, 'uid': user.pk}, 200)
 
 
 @api_view(['GET'])
