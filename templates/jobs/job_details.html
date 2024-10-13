@@ -12,14 +12,15 @@
         <p>Typ pracy: {{ offer.typeOfWork }}</p>
         <p>Rodzaj umowy: {{ offer.contract }}</p>
         <p>Tryb pracy: {{ offer.operatingMode }}</p>
-        
+
         <h3 class="mt-4">Opis</h3>
         <p>{{ offer.jobDescription }}</p>
-        
+
         <h3 class="mt-4">Wymagane umiejętności</h3>
         <p>{{ offer.requiredSkills }}</p>
-        
-        <button class="btn btn-primary mt-3">Dołącz do pokoju</button>  <!-- Dodana stylizacja przycisku -->
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-primary mt-3" href="{% url 'join_room' offer.pk %}">Dołącz do pokoju</a>  <!-- Dodana stylizacja przycisku -->
+        {% endif %}
     </div>
 </main>
 

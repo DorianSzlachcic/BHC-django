@@ -21,16 +21,23 @@ def generate_token(request, username, channel):
         channel,
         user.pk,
         Role_Publisher,
-        1800,
+        3600,
     )
     return Response({'token': token, 'app_id': settings.AGORA_APP_ID, 'uid': user.pk}, 200)
 
 @api_view(['GET'])
 def place_in_queue(request, username, channel):
-    job = Job.objects.get(channel__name=channel)
-    for index, user in enumerate(job.joinedUsers):
+    job = Job.objects.get(channel__pk=channel)
+    for index, user in enumerate(job.joinedUsers.all()):
         if user.username == username:
-            return Response({'place': index})
+            return Response({'place': index}, 200)
+    return Response(status=404)
+
+@api_view(['GET'])
+def leave_queue(request, username, channel):
+    job = Job.objects.get(channel__pk=channel)
+    job.joinedUsers.remove(job.joinedUsers.get(pk=username))
+    return Response(status=200)
 
 
 @api_view(['GET'])

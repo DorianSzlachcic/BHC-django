@@ -12,11 +12,7 @@ def jobOffers(request):
 
 def jobDetails(request, id):
     details = Job.objects.get(pk=id)
-    applied = False
-    if request.user.is_authenticated:
-        if details.appliedUsers.contains(request.user):
-            applied = True
-    return render(request, "jobs/job_details.html", context={'offer': details, 'applied': applied})
+    return render(request, "jobs/job_details.html", context={'offer': details})
 
 @login_required
 def yourOffers(request):
@@ -66,10 +62,13 @@ def delete(request, id):
 @login_required
 def open_room(request, id):
     job = Job.objects.get(pk=id)
+    job.channel.opened = True
+    job.save()
     return redirect(f'{settings.REACT_URL}recruiter/{request.user.username}/{job.channel.id}')
 
 @login_required
 def join_room(request, id):
     job = Job.objects.get(pk=id)
     job.joinedUsers.add(request.user)
+    job.save()
     return redirect(f'{settings.REACT_URL}candidate/{request.user.username}/{job.channel.id}')
