@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from api.models import Channel
+
 class Job(models.Model):
     title = models.CharField(max_length=128)
     employer = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
@@ -13,4 +15,5 @@ class Job(models.Model):
     dateAdded = models.DateField(auto_now_add=True)
     dateExpired = models.DateField()
     salary = models.IntegerField()
-    appliedUsers = models.ManyToManyField(User, blank=True, related_name='+')
+    joinedUsers = models.ManyToManyField(User, blank=True, related_name='+')
+    channel = models.OneToOneField(Channel, null=True, blank=True, on_delete=models.CASCADE)

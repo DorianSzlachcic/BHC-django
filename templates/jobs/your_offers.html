@@ -29,6 +29,7 @@
                 </div>
                 <div class="card-footer text-center">
                     <a href="{% url 'editOffer' offer.id %}" class="btn btn-warning btn-sm">Edytuj</a>
+                    <a href="{% url 'openRoom' offer.id %}" class="btn btn-secondary btn-sm">Otwórz pokój</a>
                     <a href="{% url 'delete' id=offer.id %}" class="btn btn-danger btn-sm">Usuń</a>
                 </div>
             </div>

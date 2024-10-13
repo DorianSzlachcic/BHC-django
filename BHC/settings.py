@@ -28,12 +28,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AGORA_APP_ID = '7100b184dfb14e03beb0f154af4fc804'
-AGORA_APP_CERTIFICATE = '47e5a0312b664d81bb65e8f4caee81ed'
+AGORA_APP_CERTIFICATE = 'edb45a446db9480a9ffd6bff35a1467e'
 
-REACT_URL = 'http://127.0.0.1:5173/'
+REACT_URL = 'http://localhost:5173/'
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
+    'http://localhost:5173',
+    'http://172.19.199.67:5173'
 ]
 
 # Application definition
