@@ -1,33 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quick Job - Szukaj Pracy</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    </head>
-    
-    <body>
-      <div >
-        <h2>Zarejestruj frimę</h2>
-        <div >
-        <form method="POST" action="">
-            {% csrf_token %}
-            {{form}}
-            <div>
-                <button type="submit">Zarejestruj firmę</button>
-            </div>
-        </form>
-        {% for msg in messages %}
-        {{msg}}
-        {% endfor %}
-        </div>
-    </div>
-  
-      <footer class="bg-light text-center py-3">
-          <p>&copy; 2024 SnapHire. Wszystkie prawa zastrzeżone.</p>
-      </footer>
+{% include 'head.html' %}
+{% include 'navbar.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-    </body>
-</html>
+    <main class="container d-flex align-items-start justify-content-center" style="height: 100vh;">
+        <div class="w-50 text-center mt-5">  <!-- Zwiększony margines górny -->
+            <h2>Zarejestruj firmę</h2>
+            <div class="w-75 mx-auto">  <!-- Szerokość formularza -->
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {{form|crispy}}  <!-- Zastosowanie crispy forms -->
+                    <div class="text-center mt-3">
+                        <button type="submit" class="btn btn-primary">Zarejestruj firmę</button>  <!-- Stylizacja przycisku -->
+                    </div>
+                </form>
+
+                <!-- Wiadomości o błędach / powodzeniu -->
+                {% for msg in messages %}
+                    <div class="alert alert-info mt-3">{{ msg }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    {% include 'footer.html' %}

@@ -1,21 +1,35 @@
-<!DOCTYPE html>
-<head>
+{% include 'head.html' %}
+{% include 'navbar.html' %}
+{% load static %}
 
-</head>
-
-<body>
-    <div>
-        <h2>Job offers</h2>
-        {% for offer in jobs %}
-            <p>------------------------------------------</p>
-            <a href="{% url 'details' offer.pk %}">{{ offer.title }}<br></a>
-            <img src="{{offer.employerLogo}}">
-            <b>{{ offer.employer }} </b>
-            <p> salary: {{ offer.salary }} zł/mc</p>
-            {% now "DATE_FORMAT" as current_time %}
-            <p> open for {{ offer.dateExpired }}</p>
-        {% endfor %}
+<main class="container mt-5">
+    <div class="col">
+        <div class="row mb-4">
+            <h2>Oferty pracy</h2>
+        </div>
+        <div class="row">
+            {% for offer in jobs %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'details' offer.pk %}">{{ offer.title }}</a>
+                        </h5>
+                        <p class="card-text">
+                            <b>Pracodawca:</b> {{ offer.employer }}
+                        </p>
+                        <p class="card-text">
+                            <b>Zarobki:</b> {{ offer.salary }} zł/mc
+                        </p>
+                        <p class="card-text">
+                            <b>Otwarte do:</b> {{ offer.dateExpired }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</body>
+</main>
 
-</html>
+{% include 'footer.html' %}
