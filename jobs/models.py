@@ -13,3 +13,4 @@ class Job(models.Model):
     dateAdded = models.DateField(auto_now_add=True)
     dateExpired = models.DateField()
     salary = models.IntegerField()
+    appliedUsers = models.ManyToManyField(User, blank=True, related_name='+')
