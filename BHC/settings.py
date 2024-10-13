@@ -30,6 +30,9 @@ ALLOWED_HOSTS = []
 AGORA_APP_ID = '7100b184dfb14e03beb0f154af4fc804'
 AGORA_APP_CERTIFICATE = '47e5a0312b664d81bb65e8f4caee81ed'
 
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5173',
+]
 
 # Application definition
 
@@ -46,12 +49,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms',
     'crispy_bootstrap4',
+    'corsheaders',
 ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
