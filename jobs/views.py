@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
+from api.models import Channel
 from jobs.models import Job
 from django.contrib.auth.decorators import login_required
 from .forms import JobForm
@@ -30,6 +31,8 @@ def add(request):
         form = JobForm(request.POST)
         if form.is_valid():
             offers = form.save(commit=False)
+            channel = Channel.objects.create(name='').save()
+            offers.channel = channel
             offers.employer = request.user
             offers.save()
             return redirect('your_offers')
@@ -61,12 +64,12 @@ def delete(request, id):
     return render(request, "jobs/confirm_delete.html")
 
 @login_required
-def apply(request, id):
+def open_room(request, id):
     job = Job.objects.get(pk=id)
-    job.appliedUsers.add(request.user)
-    job.save()
-    return redirect('details', id)
+    return redirect(f'{settings.REACT_URL}recruiter/{request.user.username}/{job.channel.id}')
 
 @login_required
-def open_room(request, id):
-    return redirect(f'{settings.REACT_URL}recruiter/{request.user.username}/{request.user.pk}{id}')
+def join_room(request, id):
+    job = Job.objects.get(pk=id)
+    job.joinedUsers.add(request.user)
+    return redirect(f'{settings.REACT_URL}candidate/{request.user.username}/{job.channel.id}')
