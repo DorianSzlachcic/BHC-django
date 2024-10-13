@@ -6,3 +6,7 @@ body {
     background-color: #204c84 !important;
     border-color: #204c84 !important;
   }
+
+main {
+    min-height: 88vh;
+}
