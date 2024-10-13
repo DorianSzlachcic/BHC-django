@@ -17,6 +17,8 @@ def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')
     form = AuthenticationForm()
+    form.fields['username'].label = ''
+    form.fields['password'].label = ''
 
     if request.method == 'POST':
         username = request.POST.get('username')

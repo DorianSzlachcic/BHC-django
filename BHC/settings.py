@@ -43,8 +43,11 @@ INSTALLED_APPS = [
     'accounts',
     'jobs',
     'api',
-    'rest_framework'
+    'rest_framework',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,6 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'BHC.urls'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
