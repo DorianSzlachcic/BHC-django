@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render, redirect
 from jobs.models import Job
 from django.contrib.auth.decorators import login_required
@@ -10,12 +11,16 @@ def jobOffers(request):
 
 def jobDetails(request, id):
     details = Job.objects.get(pk=id)
-    return render(request, "jobs/job_details.html", context={'offer': details})
+    applied = False
+    if request.user.is_authenticated:
+        if details.appliedUsers.contains(request.user):
+            applied = True
+    return render(request, "jobs/job_details.html", context={'offer': details, 'applied': applied})
 
 @login_required
 def yourOffers(request):
     offers = Job.objects.filter(employer=request.user)
-    return render(request, "jobs/your_offers.html", context={'jobs': offers})
+    return render(request, "jobs/your_offers.html", context={'jobs': offers, 'react_url': settings.REACT_URL})
 
 @login_required
 def add(request):
@@ -54,3 +59,14 @@ def delete(request, id):
         offer.delete()
         return redirect('your_offers')
     return render(request, "jobs/confirm_delete.html")
+
+@login_required
+def apply(request, id):
+    job = Job.objects.get(pk=id)
+    job.appliedUsers.add(request.user)
+    job.save()
+    return redirect('details', id)
+
+@login_required
+def open_room(request, id):
+    return redirect(f'{settings.REACT_URL}recruiter/{request.user.username}/{request.user.pk}{id}')
