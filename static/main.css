@@ -1,0 +1,8 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.btn-primary {
+    background-color: #204c84 !important;
+    border-color: #204c84 !important;
+  }

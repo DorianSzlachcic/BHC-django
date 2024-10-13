@@ -1,26 +1,37 @@
 {% include 'head.html' %}
 {% include 'navbar.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
     <main class="container d-flex align-items-center" style="height: 80vh;">
         <div class="w-50 text-center">
             <h2>Logowanie</h2>
-            <div>
-            <form method="POST" action="">
-                {% csrf_token %}
-                {{form}}
-                <div>
-                    <button type="submit">Zaloguj się</button>
-                </div>
-            </form>
+            <div class="w-50 mx-auto text-center ">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <!-- 'first_name','last_name','username','email','password1','password2' -->
+                    <div class="row mb-4">
+                        <label for="id_username">Nazwa użytkownika</label>
+                        {{form.username|as_crispy_field}}
+                    </div>
+                    <div class="row mb-4">
+                        <label for="id_password">Hasło</label>
+                        {{form.password|as_crispy_field}}
+                    </div>
+                    
+                    <!-- {{form}} -->
+                    <div>
+                        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+                    </div>
+                </form>
 
-            {% for msg in messages %}
-            {{msg}}
-            {% endfor %}
+                {% for msg in messages %}
+                {{msg}}
+                {% endfor %}
             </div>
         </div>
         <div class="w-50 text-center">
-            <img src="{% static 'id-card-icon.svg' %}" alt="" width="300" height="300" class="d-inline-block align-text-top">
+            <img src="{% static 'id-card-icon.svg' %}" alt="" width="300" height="300" class="d-inline-block align-text-top" style="transform: rotate(-18deg);"">
         </div>
     </main>
 {% include 'footer.html' %}
