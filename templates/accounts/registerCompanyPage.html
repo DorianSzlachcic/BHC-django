@@ -3,7 +3,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-    <main class="container d-flex align-items-start justify-content-center" style="height: 100vh;">
+    <main class="container d-flex align-items-start justify-content-center">
         <div class="w-50 text-center mt-5">  <!-- Zwiększony margines górny -->
             <h2>Zarejestruj firmę</h2>
             <div class="w-75 mx-auto">  <!-- Szerokość formularza -->
@@ -20,6 +20,9 @@
                     <div class="alert alert-info mt-3">{{ msg }}</div>
                 {% endfor %}
             </div>
+        </div>
+        <div class="w-50 text-center mt-5">
+            <img src="{% static 'worker-icon.svg' %}" alt="" width="300" height="300" class="d-inline-block align-text-top">
         </div>
     </main>
 
